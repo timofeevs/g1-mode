@@ -8,6 +8,7 @@ import {
   ontarioBank,
   ontarioQuestions,
 } from '@/content/ontario/questions';
+import { rulesQuestions } from '@/content/ontario/rules';
 import { signsQuestions } from '@/content/ontario/signs';
 
 /**
@@ -20,7 +21,7 @@ import { signsQuestions } from '@/content/ontario/signs';
 
 describe('Ontario bank assembly', () => {
   it('is exactly the concatenation of its section files', () => {
-    expect(ontarioQuestions).toEqual([...signsQuestions]);
+    expect(ontarioQuestions).toEqual([...signsQuestions, ...rulesQuestions]);
     expect(ontarioBank.questions).toEqual(ontarioQuestions);
   });
 
@@ -74,9 +75,6 @@ describe('Ontario bank assembly', () => {
   it('can fill a full simulation for every section that has been authored', () => {
     for (const section of Object.keys(testFormat.split) as (keyof typeof testFormat.split)[]) {
       const inSection = ontarioQuestions.filter((question) => question.category === section);
-      // The rules section ships in a later content wave; `npm run
-      // validate:questions` is the gate that must be green before release.
-      if (inSection.length === 0) continue;
       expect(inSection.length).toBeGreaterThanOrEqual(testFormat.split[section]);
     }
   });

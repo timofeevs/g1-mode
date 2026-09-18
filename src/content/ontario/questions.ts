@@ -1,3 +1,4 @@
+import { rulesQuestions } from '@/content/ontario/rules';
 import { signsQuestions } from '@/content/ontario/signs';
 import { questionBankSchema, type Question, type QuestionBank } from '@/schema/question';
 
@@ -10,14 +11,14 @@ import { questionBankSchema, type Question, type QuestionBank } from '@/schema/q
  *
  * Sections arrive in waves (build plan §1.2 targets ~450 questions):
  *  - `signs.ts` — "Traffic Signs and Lights" (38 written)
- *  - `rules.ts` — rules of the road and safe driving practices (next wave)
+ *  - `rules.ts` — rules of the road and safe driving practices (61 written)
  */
 
 /** Bank version — bump on any content change. */
-export const ONTARIO_BANK_VERSION = '1.1.0';
+export const ONTARIO_BANK_VERSION = '1.2.0';
 
 /** ISO date of the last human verification pass against the handbook. */
-export const ONTARIO_BANK_VERIFIED_AT = '2026-09-17';
+export const ONTARIO_BANK_VERIFIED_AT = '2026-09-18';
 
 /**
  * Handbook edition every `handbookRef` was checked against. Shared with the
@@ -26,7 +27,8 @@ export const ONTARIO_BANK_VERIFIED_AT = '2026-09-17';
 export const ONTARIO_HANDBOOK_EDITION = '2026 interim update';
 
 /** Every question in the bank, in section order. */
-export const ontarioQuestions: Question[] = [...signsQuestions];
+export const ontarioQuestions: Question[] = [...signsQuestions, ...rulesQuestions];
+
 
 /**
  * Parsed at module load: a three-option question, a duplicate slug or a missing
