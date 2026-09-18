@@ -8,9 +8,11 @@
     "scheme": "helloworld",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.timofeevs.g1mode"
     },
     "android": {
+      "package": "com.timofeevs.g1mode",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -40,6 +42,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "883eaac6-1ec9-4dee-be15-4441931c1e4e"
+      }
+    },
+    "owner": "timofeev"
   }
 }
