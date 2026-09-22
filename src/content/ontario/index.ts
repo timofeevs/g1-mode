@@ -1,4 +1,4 @@
-import { regionConfigSchema, type RegionConfig } from '@/schema/region';
+import { regionConfigSchema, type Products, type RegionConfig } from '@/schema/region';
 import { ONTARIO_HANDBOOK_EDITION, ontarioBank } from '@/content/ontario/questions';
 
 /**
@@ -64,8 +64,20 @@ export const region: RegionConfig = regionConfigSchema.parse(ontario);
 
 export const testFormat = region.testFormat;
 export const freeTier = region.freeTier;
-/** Store product IDs, app-facing alias for `region.productsSchema`. */
-export const products = region.productsSchema;
+/**
+ * Store product IDs, app-facing alias for `region.productsSchema`.
+ *
+ * `productsSchema` is optional in the region contract so a province fork
+ * without in-app purchase still parses, but the paywall cannot render without
+ * ids — so the Ontario build asserts them once here instead of threading
+ * `undefined` into every screen that shows a plan.
+ */
+export const products: Products = (() => {
+  if (!region.productsSchema) {
+    throw new Error('The Ontario region config is missing productsSchema; the paywall cannot render.');
+  }
+  return region.productsSchema;
+})();
 export const entitlementId = region.entitlementId;
 /** The validated bank, for screens that read content straight off the region. */
 export const bank = region.bank;
